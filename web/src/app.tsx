@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+
 import { Dialog } from './components/ui/dialog'
 import { CreateGoal } from './components/create-goal'
 import { Summary } from './components/summary'
@@ -11,16 +11,14 @@ import { getSummary } from './http/get-summary'
 export function App() {
   const { data } = useQuery({
     queryKey: ['summary'],
-    queryFn: getSummary
+    queryFn: getSummary,
+    staleTime: 1000 * 60
   })
 
   return (
     <Dialog>
-
       {data?.total && data.total > 0 ? <Summary /> : <EmptyGoals />}
-      {/* <EmptyGoals /> */}
 
-      {/* */}
       <CreateGoal />
     </Dialog>
   )
